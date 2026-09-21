@@ -17,6 +17,12 @@ def tokenize(lines):
         #Kör en i för varje bokstav så man kan köra line[i]
         for i in range(len(line)):
             currenttype = get_type(line[i])
+            # alla signs som är other ska va sin egna token, så tar ut den först
+            if currenttype == "o":
+                words.append(line[i].lower())
+                wordstart = i + 1
+                previoustype = "s" 
+                continue #avslutar loopen tidigt så inte sakerna efter här körs
             #om förra typen inte är samma som nuvarande typ, och förra typen inte är space, så lägg till ordet i listan
             if currenttype != previoustype:
                 if previoustype != "s":
