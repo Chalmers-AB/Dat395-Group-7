@@ -27,4 +27,4 @@ def main(StopWords, File, n):
 
 
 response = urllib.request.urlopen(sys.argv[2])
-main('eng_stopwords.txt',response.read().decode("utf8").splitlines(),int(sys.argv[3]))
+main(sys.argv[1],response.read().decode("utf8").splitlines(),int(sys.argv[3]))
