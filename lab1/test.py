@@ -53,6 +53,7 @@ def run(src_path=None):
 		test(wordfreq.tokenize, ["The 10 little chicks"], ["the","10","little","chicks"])
 		test(wordfreq.tokenize, ["15th anniversary"], ["15","th","anniversary"])
 		test(wordfreq.tokenize, ["He is in the room, she said."], ["he","is","in","the","room",",","she","said","."])
+		
 	else:
 		print("tokenize is not implemented yet!")
 
@@ -79,3 +80,6 @@ def run(src_path=None):
 
 if __name__ == "__main__":
 	run()
+
+
+
