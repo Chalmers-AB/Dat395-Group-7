@@ -64,13 +64,3 @@ def countWords(arr, stopWords):
             #ökar hashets värde med 1
             dic[word] += 1
     return dic
-
-
-
-def printTopMost(frequencies, n):
-    frequencies = sorted(frequencies.items(), key=lambda x: x[1])
-    y = 0
-    while y < n:
-        print(frequencies[y][0].ljust(20),frequencies[y][1].rjust(5))
-        y +=1
-    print(frequencies)
