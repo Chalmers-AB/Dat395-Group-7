@@ -17,21 +17,23 @@ def tokenize(lines):
         #Kör en i för varje bokstav så man kan köra line[i]
         for i in range(len(line)):
             currenttype = get_type(line[i])
-            # alla signs som är other ska va sin egna token, så tar ut den först
-            if currenttype == "o":
-                words.append(line[i].lower())
-                wordstart = i + 1
-                previoustype = "s" 
-                continue #avslutar loopen tidigt så inte sakerna efter här körs
+            
             #om förra typen inte är samma som nuvarande typ, och förra typen inte är space, så lägg till ordet i listan
             if currenttype != previoustype:
                 if previoustype != "s":
                     words.append(line[wordstart:i].lower())
 
                 wordstart = i
+            # alla signs som är other ska va sin egna token, så tar ut den direkt efter vi har tagit ut vårat ord ovan.
+            if currenttype == "o":
+                words.append(line[i].lower())
+                wordstart = i + 1
+                previoustype = "s" 
+                continue #avslutar loopen tidigt så inte sakerna efter här körs
             #just so if we just made a new word and got a space it will skip that and go to the next for wordstart
             if currenttype == "s":
                 wordstart = i + 1
+        
 
             previoustype = currenttype
 
@@ -54,7 +56,7 @@ def countWords(arr, stopWords):
     for word in arr:
         #om den är i stopwords ignorera den
         if word in stopWords:
-            pass
+            continue
         #om den inte redan finns i dictionary
         elif word not in dic:
             #initierar hashen
