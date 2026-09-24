@@ -1,20 +1,11 @@
 import wordfreq
 from wordfreq import tokenize
 from wordfreq import countWords
+from wordfreq import printTopMost
 import sys
 import urllib.request
 ##response = urllib.request.urlopen(sys.argv[2])
 ##lines = response.read().decode("utf8").splitlines()
-
-def printTopMost(frequencies, n):
-    frequencies = sorted(frequencies.items(), key=lambda x: -x[1])
-    y = 0
-    while y < n:
-        print(frequencies[y][0].ljust(20),str(frequencies[y][1]).rjust(5))
-        y += 1
-
-    
-
 
 def main(StopWords, File, n):
     
@@ -26,5 +17,9 @@ def main(StopWords, File, n):
     pass
 
 
-response = urllib.request.urlopen(sys.argv[2])
-main(sys.argv[1],response.read().decode("utf8").splitlines(),int(sys.argv[3]))
+if sys.argv[2].startswith(("http://", "https://")):
+    response = urllib.request.urlopen(sys.argv[2])
+    inp_file = response.read().decode("utf8").splitlines()
+else:
+    inp_file = open(sys.argv[2], encoding="utf-8").read().splitlines()
+main(sys.argv[1], inp_file, int(sys.argv[3]))
